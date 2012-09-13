@@ -30,12 +30,12 @@ public class Test {
 		
 		if (n < 1)
 		{ // Counting backwards
-			for(int i = 1; i >= n; i--)
+			for (int i = 1; i >= n; i--)
 				sum += i;
 		}
 		else
 		{ // Counting forwards
-			for(int i = 1; i <= n; i++)
+			for (int i = 1; i <= n; i++)
 				sum += i;
 		}
 		

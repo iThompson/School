@@ -1,5 +1,9 @@
 package com.ian.Test;
 
+/**
+ * @author Ian
+ *
+ */
 public class Test {
 
 	/**
@@ -15,9 +19,10 @@ public class Test {
 	}
 	
 	/**
-	 * Calculates the sum of all numbers from 1 to n
+	 * Calculates the sum of all integers between 1 and n, inclusive
+	 * @author Ian Thompson
 	 * @param n The end number
-	 * @return The sum from 1 to n
+	 * @return The sum between 1 and n
 	 */
 	public static int intSum(int n)
 	{

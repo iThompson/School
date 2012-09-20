@@ -70,7 +70,7 @@ public class CoordGeom {
 		else
 			minX = Ax;
 		
-		System.out.println("The minimum x-coordinate of all of AB = " + minX);
+		System.out.println("The minimum x-coordinate of all of AB is " + minX);
 	}
 
 	/**

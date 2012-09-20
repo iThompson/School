@@ -51,8 +51,9 @@ public class CoordGeom {
 	{
 		double midX = (Ax + Bx) / 2;
 		double midY = (Ay + By) / 2;
-		
-		System.out.println("The midpoint of segment AB is (" + midX + ", " + midY + ")");
+	
+		System.out.println("The midpoint of segment AB is (" + midX + ", "
+				+ midY + ")");
 	}
 	
 	/**

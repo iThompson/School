@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**
  * Calculates various bits of info about a line segment
- * @author ian.thompson
+ * @author Ian Thompson
  *
  */
 public class CoordGeom {
@@ -65,8 +65,10 @@ public class CoordGeom {
 	private static void printMinX(double Ax, double Ay, double Bx, double By)
 	{
 		double minX;
-		if (Ax > Bx) minX = Bx;
-		else minX = Ax;
+		if (Ax > Bx)
+			minX = Bx;
+		else
+			minX = Ax;
 		
 		System.out.println("The minimum x-coordinate of all of AB = " + minX);
 	}
@@ -85,6 +87,8 @@ public class CoordGeom {
 		System.out.print("Input point B: ");
 		double Bx = sc.nextDouble();
 		double By = sc.nextDouble();
+		
+		sc.close();
 		
 		printSlope(Ax, Ay, Bx, By);
 		printLength(Ax, Ay, Bx, By);

@@ -8,6 +8,7 @@ public class Car
 	private double myCurrentFuel;
 	private double myMilesPerGallon;
 	private double myCurrentSpeed;
+	private double myOdometer;
 	
 	/**
 	 * Constructs the car
@@ -15,8 +16,17 @@ public class Car
 	 * @param initialFuel The initial amount of fuel in the tank
 	 * @param milesPerGallon The fuel efficiency of the car
 	 */
-	public Car (double tankSize, double initialFuel, double milesPerGallon)
+	public Car (double tankSize, double initialFuel, double milesPerGallon, double initialOdometer)
 	{
+		if (tankSize < 0.0)
+			throw new IllegalArgumentException("Can't have a negative tank");
+		if (initialFuel < 0.0)
+			throw new IllegalArgumentException("Can't have negative fuel");
+		if (milesPerGallon < 0.0)
+			throw new IllegalArgumentException("Can't have negative gas mileage");
+		if (initialOdometer < 0.0)
+			throw new IllegalArgumentException("Can't have a negative odometer");
+		
 		myTankSize = tankSize;
 		myCurrentFuel = initialFuel;
 		myMilesPerGallon = milesPerGallon;
@@ -52,7 +62,7 @@ public class Car
 		// Don't let fuel be siphoned
 		if (fuel < 0.0)
 		{
-			System.out.println("You can't take fuel out!");
+			throw new IllegalArgumentException("Can't take out fuel");
 		}
 		else
 		{
@@ -77,8 +87,9 @@ public class Car
 	 */
 	public void setMilesPerGallon(double milesPerGallon)
 	{
-		// Can't have negative fuel efficiency
-		if (milesPerGallon < 0) milesPerGallon = 0.0;
+		if (milesPerGallon < 0.0)
+			throw new IllegalArgumentException("Can't have negative gas mileage");
+		
 		myMilesPerGallon = milesPerGallon;
 	}
 	
@@ -101,6 +112,15 @@ public class Car
 	}
 	
 	/**
+	 * Gets the current value of the car's odometer
+	 * @return The odometer value
+	 */
+	public double getOdometer()
+	{
+		return myOdometer;
+	}
+	
+	/**
 	 * Returns the maximum distance that can be traveled with the current fuel
 	 * @return The maximum distance
 	 */
@@ -115,21 +135,42 @@ public class Car
 	 */
 	public double getMaxTime()
 	{
-		return getMaxDistance() / myCurrentSpeed;
+		return getMaxDistance() / Math.abs(myCurrentSpeed);
 	}
 	
 	/**
 	 * Returns the distance covered over a given time
 	 * @param hours The time in hours
+	 * @return The distance covered in that time
 	 */
 	public double getDistanceForTime(double hours)
 	{
-		return myCurrentSpeed * hours;
+		if (hours < 0.0)
+			throw new IllegalArgumentException("Time cannot be negative");
+		return Math.abs(myCurrentSpeed) * hours;
 	}
 	
 	/**
-	 * 
+	 * Returns the amount of fuel used over a given time
+	 * @param hours The time in hours
+	 * @return The fuel consumption for that time
 	 */
+	public double getFuelForTime(double hours)
+	{
+		// getDistanceForTime will throw exception if necessary
+		return getDistanceForTime(hours) / myMilesPerGallon;
+	}
+	
+	/**
+	 * Returns whether or not there is enough fuel to drive for the time
+	 * @param hours The time in hours
+	 * @return Whether or not there is enough fuel
+	 */
+	public boolean canDriveTime(double hours)
+	{
+		// getFuelForTime will throw exception if necessary
+		return myCurrentFuel >= getFuelForTime(hours);
+	}
 	
 	/**
 	 * Returns how much fuel is used to travel a certain distance
@@ -168,10 +209,12 @@ public class Car
 		
 		if (canDriveDistance(distance))
 		{
+			myOdometer += distance;
 			myCurrentFuel -= getFuelForDistance(distance);
 		}
 		else
 		{
+			myOdometer += getMaxDistance();
 			myCurrentFuel = 0.0;
 		}
 	}
@@ -182,13 +225,16 @@ public class Car
 	 */
 	public void driveTime(double hours)
 	{
-		if (hours < 0.0)
+		// canDriveTime will throw IllegalArgumentException if necessary
+		if (canDriveTime(hours))
 		{
-			System.out.println("You can't drive for negative time!");
+			myOdometer += getDistanceForTime(hours);
+			myCurrentFuel -= getFuelForTime(hours);
 		}
 		else
 		{
-			
+			myOdometer += getMaxDistance();
+			myCurrentFuel = 0.0;
 		}
 	}
 }

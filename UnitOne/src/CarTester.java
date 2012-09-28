@@ -5,12 +5,14 @@
  */
 public class CarTester
 {
-	private static void testTankSizeException()
+	@SuppressWarnings("unused")
+	private static void testConstructorArgument(String name, double tankSize,
+			double initialFuel, double milesPerGallon, double initialOdometer)
 	{
-		System.out.print("tankSize: ");
+		System.out.print(name + ": ");
 		try
 		{
-			Car car = new Car(-1.0, 23.0, 12.0, 4.0);
+			Car car = new Car(tankSize, initialFuel, milesPerGallon, initialOdometer);
 			// Should not get here
 			System.out.print("FAILED ");
 		}
@@ -18,50 +20,9 @@ public class CarTester
 		{
 			System.out.print("PASSED ");
 		}
-	}
-	
-	private static void testInitialFuelException()
-	{
-		System.out.print("initialFuel: ");
-		try
+		catch (Exception e)
 		{
-			Car car = new Car(1.0, -23.0, 12.0, 4.0);
-			// Should not get here
-			System.out.print("FAILED ");
-		}
-		catch (IllegalArgumentException e)
-		{
-			System.out.print("PASSED ");
-		}
-	}
-	
-	private static void testInitialMileageException()
-	{
-		System.out.print("initialMileage: ");
-		try
-		{
-			Car car = new Car(1.0, 23.0, -12.0, 4.0);
-			// Should not get here
-			System.out.print("FAILED ");
-		}
-		catch (IllegalArgumentException e)
-		{
-			System.out.print("PASSED ");
-		}
-	}
-	
-	private static void testInitialOdometerException()
-	{
-		System.out.print("initialOdometer: ");
-		try
-		{
-			Car car = new Car(1.0, 23.0, 12.0, -4.0);
-			// Should not get here
-			System.out.print("FAILED ");
-		}
-		catch (IllegalArgumentException e)
-		{
-			System.out.print("PASSED ");
+			System.out.print("WRONG ");
 		}
 	}
 	
@@ -69,10 +30,10 @@ public class CarTester
 	{
 		System.out.println("Testing exceptions in the Car constructor");
 		
-		testTankSizeException();
-		testInitialFuelException();
-		testInitialMileageException();
-		testInitialOdometerException();
+		testConstructorArgument("tankSize", -30.0, 23.0, 12.0, 4.0);
+		testConstructorArgument("initialFuel", 30.0, -23.0, 12.0, 4.0);
+		testConstructorArgument("initialMileage", 30.0, 23.0, -12.0, 4.0);
+		testConstructorArgument("initialOdometer", 30.0, 23.0, 12.0, -4.0);
 		
 		System.out.println("");
 	}
@@ -82,6 +43,40 @@ public class CarTester
 		testConstructorExceptions();
 		
 		Car car = new Car(20.0, 15.0, 30.0, 142.6);
+		car.setSpeed(40.0);
+		
+		System.out.println("Maximum distance is " + car.getMaxDistance() + " miles");
+		System.out.println("Expected value is 450.0 miles");
+		System.out.println("Maximum time is " + car.getMaxTime() + " hours");
+		System.out.println("Expected value is 11.25 hours");
+		
+		car.driveDistance(250.0);
+		System.out.println("Odometer value is " + car.getOdometer() + " miles");
+		System.out.println("Expected value is 392.6");
+		System.out.println("Amount of fuel is " + car.getCurrentFuel() + " gallons");
+		System.out.println("Expected value is 6.66666666 gallons");
+		
+		car.driveTime(2);
+		System.out.println("Odometer value is " + car.getOdometer() + " miles");
+		System.out.println("Expected value is 472.6 miles");
+		System.out.println("Amount of fuel is " + car.getCurrentFuel() + " gallons");
+		System.out.println("Expected value is 4.0 gallons");
+		
+		System.out.println("Draining tank!");
+		car.driveDistance(10000000.0);
+		System.out.println("Odometer value is " + car.getOdometer() + " miles");
+		System.out.println("Expected value is 592.6 miles");
+		System.out.println("Amount of fuel is " + car.getCurrentFuel() + " gallons");
+		System.out.println("Expected value is 0.0 gallons");
+		
+		car.addFuel(10.0);
+		System.out.println("Amount of fuel is " + car.getCurrentFuel() + " gallons");
+		System.out.println("Expected value is 10.0 gallons");
+		
+		System.out.println("Overfilling tank!");
+		car.addFuel(100.0);
+		System.out.println("Amount of fuel is " + car.getCurrentFuel() + " gallons");
+		System.out.println("Expected value is 20.0 gallons");
 	}
 
 }

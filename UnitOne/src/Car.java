@@ -31,6 +31,7 @@ public class Car
 		myCurrentFuel = initialFuel;
 		myMilesPerGallon = milesPerGallon;
 		myCurrentSpeed = 0.0;
+		myOdometer = initialOdometer;
 		if (myCurrentFuel > myTankSize)
 			myCurrentFuel = myTankSize;
 	}

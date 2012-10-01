@@ -1,10 +1,20 @@
 /**
+ * A class to test Car
  * 
  * @author Ian Thompson
  *
  */
 public class CarTester
 {
+	/**
+	 * A helper for testConstructorExceptions which performs the actual test
+	 * 
+	 * @param name The argument being tested
+	 * @param tankSize The car's tankSize
+	 * @param initialFuel The car's initialFuel
+	 * @param milesPerGallon The car's milesPerGallon
+	 * @param initialOdometer The car's initialOdometer
+	 */
 	@SuppressWarnings("unused")
 	private static void testConstructorArgument(String name, double tankSize,
 			double initialFuel, double milesPerGallon, double initialOdometer)
@@ -26,6 +36,9 @@ public class CarTester
 		}
 	}
 	
+	/**
+	 * Checks that the constructor for Car generates the proper exceptions
+	 */
 	private static void testConstructorExceptions()
 	{
 		System.out.println("Testing exceptions in the Car constructor");

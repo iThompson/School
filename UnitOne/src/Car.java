@@ -1,4 +1,5 @@
 /**
+ * A class to simulate a car with fuel efficiency, as well as an odometer
  * @author ian.thompson
  *
  */
@@ -16,7 +17,8 @@ public class Car
 	 * @param initialFuel The initial amount of fuel in the tank
 	 * @param milesPerGallon The fuel efficiency of the car
 	 */
-	public Car (double tankSize, double initialFuel, double milesPerGallon, double initialOdometer)
+	public Car (double tankSize, double initialFuel, double milesPerGallon,
+					double initialOdometer)
 	{
 		if (tankSize < 0.0)
 			throw new IllegalArgumentException("Can't have a negative tank");
@@ -131,7 +133,7 @@ public class Car
 	}
 	
 	/**
-	 * Returns the maximum time that the car can be driven for with the current fuel
+	 * Returns the maximum time that the car can be driven with the current fuel
 	 * @return The maximum time
 	 */
 	public double getMaxTime()

@@ -1,31 +1,48 @@
 /**
  * A class to model an employee, with a name and a salary
  * @author Ian Thompson
- *
+ * @version 10/8/2012
  */
 public class Employee
 {
-	private String m_name;
-	private double m_salary;
+	private String mName;
+	private double mSalary;
 
+	/**
+	 * Creates the employee
+	 * @param employeeName The employee's name
+	 * @param currentSalary The employee's initial salary
+	 */
 	public Employee(String employeeName, double currentSalary)
 	{
-		m_name = employeeName;
-		m_salary = currentSalary;
+		mName = employeeName;
+		mSalary = currentSalary;
 	}
 	
+	/**
+	 * Returns the employee's name
+	 * @return The employee's name
+	 */
 	public String getName()
 	{
-		return m_name;
+		return mName;
 	}
 	
+	/**
+	 * Returns the employee's salary
+	 * @return The employee's salary
+	 */
 	public double getSalary()
 	{
-		return m_salary;
+		return mSalary;
 	}
 	
+	/**
+	 * Raises the employee's salary
+	 * @param byPercent The percentage to raise the salary by
+	 */
 	public void raiseSalary(double byPercent)
 	{
-		m_salary += m_salary * byPercent * 0.01;
+		mSalary += mSalary * byPercent * 0.01;
 	}
 }

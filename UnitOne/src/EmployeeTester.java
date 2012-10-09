@@ -1,4 +1,8 @@
-
+/**
+ * A class to test the Employee class
+ * @author Ian Thompson
+ * @version 10/8/2012
+ */
 public class EmployeeTester
 {
 
@@ -6,7 +10,7 @@ public class EmployeeTester
 	{
 		Employee employee = new Employee("Fred", 3000.0);
 		
-		System.out.println("Testing Employee class");
+		System.out.println("Testing the Employee class");
 		System.out.println();
 		
 		System.out.println("Name is " + employee.getName());

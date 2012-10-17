@@ -19,7 +19,8 @@ public class PaycheckTester
 			{
 				try
 				{
-					Paycheck check = new Paycheck(sc.next(), sc.nextDouble(), sc.nextDouble());
+					Paycheck check = new Paycheck(sc.next(), sc.nextDouble(),
+															sc.nextDouble());
 					System.out.println("Writing paycheck for " + check.getName());
 					out.println(check.getName() + ": " + check.getPay() + " dollars");
 					sc.nextLine();

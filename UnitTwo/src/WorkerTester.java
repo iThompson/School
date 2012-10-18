@@ -36,6 +36,7 @@ public class WorkerTester
 			}
 			else
 			{
+				System.out.println("That's not a valid type!");
 				return null;
 			}
 		}
@@ -73,12 +74,11 @@ public class WorkerTester
 					+ work.getName() + "'s pay for 35 hours is " + work.computePay(35));
 				System.out.println("The " + work.getClass().getName() + " "
 					+ work.getName() + "'s pay for 55 hours is " + work.computePay(55));
-
-				System.out.println("Type C to continue, or anything else to stop");
-				String reply = sc.nextLine();
-				if (!reply.equalsIgnoreCase("C"))
-					stop = true;
 			}
+			System.out.println("Type C to continue, or anything else to stop");
+			String reply = sc.nextLine();
+			if (!reply.equalsIgnoreCase("C"))
+				stop = true;
 		}
 		System.out.println("Goodbye!");
 	}

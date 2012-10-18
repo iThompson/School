@@ -37,11 +37,13 @@ public class WorkerTester
 		catch (NoSuchElementException e)
 		{
 			System.out.println("Failed to parse input: " + e.getMessage());
+			sc.nextLine();
 			return null;
 		}
 		catch (IllegalArgumentException e)
 		{
 			System.out.println("Invalid arguments: " + e.getMessage());
+			sc.nextLine();
 			return null;
 		}
 	}
@@ -67,7 +69,7 @@ public class WorkerTester
 				System.out.println("The " + work.getClass().getName() + " "
 					+ work.getName() + "'s pay for 55 hours is " + work.computePay(55));
 
-				System.out.println("Press C to continue, or any other key to stop");
+				System.out.println("Type C to continue, or anything else to stop");
 				String reply = sc.nextLine();
 				if (!reply.equalsIgnoreCase("C"))
 					stop = true;

@@ -1,3 +1,0 @@
-Steve: 336.0 dollars
-Bill: 1414.0 dollars
-Jane: 312.6 dollars

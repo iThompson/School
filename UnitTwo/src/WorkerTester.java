@@ -60,16 +60,20 @@ public class WorkerTester
 			{
 				System.out.println("Failed to create worker");
 			}
+			else
+			{
+				System.out.println("The " + work.getClass().getName() + " "
+					+ work.getName() + "'s pay for 35 hours is " + work.computePay(35));
+				System.out.println("The " + work.getClass().getName() + " "
+					+ work.getName() + "'s pay for 55 hours is " + work.computePay(55));
+
+				System.out.println("Press C to continue, or any other key to stop");
+				String reply = sc.nextLine();
+				if (!reply.equalsIgnoreCase("C"))
+					stop = true;
+			}
 		}
-		
-		System.out.println("The " + work.getClass().getName() + " " 
-								+ work.getName() + "'s pay is " + work.computePay(35));
-		System.out.println("John Doe's pay should be 525.0");
-		
-		work = new SalariedWorker("Jane Doe", 15.0);
-		System.out.println("The " + work.getClass().getName() + " " 
-								+ work.getName() + "'s pay is " + work.computePay(35));
-		System.out.println("Jane Doe's pay should be 600.0");
+		System.out.println("Goodbye!");
 	}
 
 }

@@ -13,7 +13,7 @@ public class WorkerTester
 	 * @param sc The Scanner to pull the input from
 	 * @return A Worker, constructed based on the user input
 	 */
-	private static Object askForWorker(Scanner sc)
+	private static Worker askForWorker(Scanner sc)
 	{
 		try
 		{
@@ -26,29 +26,17 @@ public class WorkerTester
 			String type = sc.next();
 			sc.nextLine();
 
-			String classType;
 			if (type.equalsIgnoreCase("H"))
 			{
-				classType = "HourlyWorker";
+				return new HourlyWorker(name, wage);
 			}
 			else if (type.equalsIgnoreCase("S"))
 			{
-				classType = "SalariedWorker";
+				return new SalariedWorker(name, wage);
 			}
 			else
 			{
 				System.out.println("That's not a valid type!");
-				return null;
-			}
-			
-			try
-			{
-				return Class.forName(classType).getConstructor(String.class, double.class).newInstance(name, wage);
-			}
-			catch (Exception e)
-			{
-				System.out.println("ERROR: " + e.getMessage());
-				e.printStackTrace();
 				return null;
 			}
 		}
@@ -69,7 +57,7 @@ public class WorkerTester
 	public static void main(String[] args)
 	{
 		Scanner sc = new Scanner(System.in);
-		Object work;
+		Worker work;
 		boolean stop = false;
 		
 		while (!stop)
@@ -82,18 +70,10 @@ public class WorkerTester
 			}
 			else
 			{
-				try
-				{
-					System.out.println("The " + work.getClass().getName() + " "
-							+ work.getClass().getMethod("getName").invoke(work) + "'s pay for 35 hours is " + work.getClass().getMethod("computePay", int.class).invoke(work, 35));
-					System.out.println("The " + work.getClass().getName() + " "
-							+ work.getClass().getMethod("getName").invoke(work) + "'s pay for 55 hours is " + work.getClass().getMethod("computePay", int.class).invoke(work, 55));
-				}
-				catch (Exception e)
-				{
-					System.out.println("ERROR: " + e.getMessage());
-					e.printStackTrace();
-				}
+				System.out.println("The " + work.getClass().getName() + " "
+					+ work.getName() + "'s pay for 35 hours is " + work.computePay(35));
+				System.out.println("The " + work.getClass().getName() + " "
+					+ work.getName() + "'s pay for 55 hours is " + work.computePay(55));
 			}
 			System.out.println("Type C to continue, or anything else to stop");
 			String reply = sc.nextLine();

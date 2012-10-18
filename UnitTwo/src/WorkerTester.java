@@ -4,10 +4,15 @@ import java.util.Scanner;
 /**
  * A class to test the Worker class and its subclasses
  * @author Ian Thompson
- *
+ * @version 10.10.2012
  */
 public class WorkerTester
 {
+	/**
+	 * A helper method which asks for the parameters for a Worker
+	 * @param sc The Scanner to pull the input from
+	 * @return A Worker, constructed based on the user input
+	 */
 	private static Worker askForWorker(Scanner sc)
 	{
 		try
@@ -79,3 +84,5 @@ public class WorkerTester
 	}
 
 }
+
+// Class.forName("HourlyWorker").getMethod("computePay", int.class).invoke(Class.forName("HourlyWorker").getConstructor(String.class, double.class).newInstance("John Doe", 35.0), 45);

@@ -15,7 +15,6 @@ public class SalariedWorker extends Worker
 	public SalariedWorker(String name, double wage)
 	{
 		super(name, wage);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

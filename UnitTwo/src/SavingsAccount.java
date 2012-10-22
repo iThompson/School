@@ -5,6 +5,7 @@
 public class SavingsAccount extends BankAccount
 {
     private double interestRate;
+    private double minimum;
     
     /**
      * Constructs a bank account with a given interest rate.
@@ -13,6 +14,14 @@ public class SavingsAccount extends BankAccount
     public SavingsAccount(double rate)
     {
         interestRate = rate;
+        minimum = getBalance();
+    }
+    
+    public void withdraw(double amount)
+    {
+   	 super.withdraw(amount);
+   	 if (getBalance() < minimum)
+   		 minimum = getBalance();
     }
     
     /**
@@ -20,7 +29,7 @@ public class SavingsAccount extends BankAccount
      */
     public void addInterest()
     {
-        double interest = getBalance() * interestRate / 100;
+        double interest = minimum * interestRate / 100;
         deposit(interest);
     }
 }

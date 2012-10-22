@@ -27,7 +27,7 @@ public class SavingsAccount extends BankAccount
     /**
      * Adds the earned interest to the account balance.
      */
-    public void addInterest()
+    public void endOfMonth()
     {
         double interest = minimum * interestRate / 100;
         deposit(interest);

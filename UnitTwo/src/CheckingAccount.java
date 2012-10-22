@@ -39,7 +39,7 @@ public class CheckingAccount extends BankAccount
      * Deducts the accumulated fees and resets the
      * transaction count.
      */
-    public void deductFees()
+    public void endOfMonth()
     {
         if (transactionCount > FREE_TRANSACTIONS)
         {

@@ -2,7 +2,7 @@
  * A bank account has a balance that can be changed by
  * deposits and withdrawals.
  */
-public class BankAccount
+public abstract class BankAccount
 {
     private double balance;
     
@@ -59,5 +59,18 @@ public class BankAccount
     {
         withdraw(amount);
         other.deposit(amount);
+    }
+    
+    public abstract void endOfMonth();
+    
+    public static void test(BankAccount account)
+    {
+   	 account.deposit(200);
+   	 account.withdraw(100);
+   	 account.deposit(500);
+   	 account.withdraw(600);
+   	 account.withdraw(20);
+   	 
+   	 account.endOfMonth();
     }
 }

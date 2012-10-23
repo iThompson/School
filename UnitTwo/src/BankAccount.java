@@ -61,6 +61,9 @@ public abstract class BankAccount
         other.deposit(amount);
     }
     
+    /**
+     * Performs any tasks required at the end of the month
+     */
     public abstract void endOfMonth();
     
     public static void test(BankAccount account)

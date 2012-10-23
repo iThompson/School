@@ -1,4 +1,5 @@
 /**
+ * A savings account which takes a certain number of months to mature
  * @author Ian Thompson
  * @version 10.22.2012
  */
@@ -8,7 +9,8 @@ public class TimeDepositAccount extends SavingsAccount
 	public final double EARLY_PENALTY = 20.0;
 	
 	/**
-	 * 
+	 * Constructs a TimeDepositAccount, given an interest rate and
+	 * minimum number of months
 	 * @param interestRate
 	 * @param months
 	 */
@@ -18,6 +20,10 @@ public class TimeDepositAccount extends SavingsAccount
 		mMonths = months;
 	}
 	
+	/**
+	 * Applies interest to the account, and brings the account one month closer
+	 * to maturing
+	 */
 	@Override
 	public void endOfMonth()
 	{
@@ -27,6 +33,10 @@ public class TimeDepositAccount extends SavingsAccount
 			mMonths--;
 	}
 	
+	/**
+	 * Withdraws an amount from the account, with a penalty for early withdraw
+	 * @param amount The amount to withdraw
+	 */
 	@Override
 	public void withdraw(double amount)
 	{

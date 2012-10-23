@@ -17,6 +17,10 @@ public class SavingsAccount extends BankAccount
         minimum = getBalance();
     }
     
+    /**
+     * Withdraws a certain amount from the account
+     * @param amount The amount to withdraw
+     */
     public void withdraw(double amount)
     {
    	 super.withdraw(amount);

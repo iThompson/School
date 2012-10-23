@@ -21,6 +21,10 @@ public class CheckingAccount extends BankAccount
         transactionCount = 0;
     }
     
+    /**
+     * Adds money to the account
+     * @param amount The amount of money to add
+     */
     public void deposit(double amount)
     {
         transactionCount++;
@@ -28,6 +32,10 @@ public class CheckingAccount extends BankAccount
         super.deposit(amount);
     }
     
+    /**
+     * Withdraws money from the account
+     * @param amount the amount of money to withdraw
+     */
     public void withdraw(double amount)
     {
         transactionCount++;

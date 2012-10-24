@@ -35,5 +35,6 @@ public class SavingsAccount extends BankAccount
     {
         double interest = minimum * interestRate / 100;
         deposit(interest);
+        minimum = getBalance();
     }
 }

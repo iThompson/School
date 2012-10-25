@@ -24,12 +24,9 @@ public class BankAccountTester
 	public static void main(String[] args)
 	{
 		BankAccount account = new SavingsAccount(10);
-		// Because of minimums, the first month will always have 0 interest
-		account.deposit(100);
-		account.endOfMonth();
 		test(account);
 		System.out.println("The SavingsAccount's balance is " + account.getBalance());
-		System.out.println("The expected value is 290.0");
+		System.out.println("The expected value is 190.0");
 		System.out.println();
 		
 		account = new CheckingAccount(0);
@@ -40,13 +37,15 @@ public class BankAccountTester
 		
 		account = new TimeDepositAccount(10, 2);
 		test(account);
-		System.out.println("The TimeDepositAccount's balance is " + account.getBalance());
-		System.out.println("The expected value is 120.0");
+		System.out.println("The TimeDepositAccount's balance is "
+				+ account.getBalance());
+		System.out.println("The expected value is 128.0");
 		System.out.println("Bringing the account to maturity");
 		account.endOfMonth();
 		test(account);
-		System.out.println("The TimeDepositAccount's balance is " + account.getBalance());
-		System.out.println("The expected value is 325.2");
+		System.out.println("The TimeDepositAccount's balance is "
+				+ account.getBalance());
+		System.out.println("The expected value is 334.88");
 	}
 
 }

@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class ReverseInt
 {
 	
-	private static int flipInt(int num)
+	private static long flipNum(long num)
 	{
 		boolean sign = num < 0;
 		num = Math.abs(num);
 		
-		int ret = 0;
+		long ret = 0;
 		while (num > 0)
 		{
 			ret *= 10;
@@ -30,10 +30,10 @@ public class ReverseInt
 	{
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Input an integer: ");
-		int val;
+		long val;
 		try
 		{
-			val = sc.nextInt();
+			val = sc.nextLong();
 		}
 		catch (InputMismatchException e)
 		{
@@ -42,7 +42,7 @@ public class ReverseInt
 			return;
 		}
 		
-		System.out.println("The flipped value is " + flipInt(val));
+		System.out.println("The flipped value is " + flipNum(val));
 		sc.close();
 	}
 

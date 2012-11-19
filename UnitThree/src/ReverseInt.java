@@ -1,10 +1,19 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-
+/**
+ * Reads an integer (actually a long) off of the console, and reversed its digits
+ * @author Ian Thompson
+ * @version 11/17/2012
+ */
 public class ReverseInt
 {
 	
+	/**
+	 * Reverses the order of digits in an integer
+	 * @param num The integer to reverse
+	 * @return The reversed integer
+	 */
 	private static long flipNum(long num)
 	{
 		boolean sign = num < 0;
@@ -17,15 +26,13 @@ public class ReverseInt
 			ret += num % 10;
 			num /= 10;
 		}
+		
 		if (sign) 
 			ret = -ret;
 		
 		return ret;
 	}
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args)
 	{
 		Scanner sc = new Scanner(System.in);
@@ -42,7 +49,7 @@ public class ReverseInt
 			return;
 		}
 		
-		System.out.println("The flipped value is " + flipNum(val));
+		System.out.println("The reversed value is " + flipNum(val));
 		sc.close();
 	}
 

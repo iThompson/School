@@ -3,7 +3,7 @@
  * @author Ian Thompson
  * @version 11.25.2012
  */
-public class Fraction
+public class Fraction implements Comparable<Fraction>
 {
 	private int mNumerator;
 	private int mDenominator;
@@ -70,6 +70,17 @@ public class Fraction
 	}
 	
 	/**
+	 * Creates a copy of this fraction, and reduces it
+	 * @return A reduced copy of this fraction
+	 */
+	public Fraction copyAndReduce()
+	{
+		Fraction frac = new Fraction(mNumerator, mDenominator);
+		frac.reduce();
+		return frac;
+	}
+	
+	/**
 	 * Finds the greatest common divisor between two numbers
 	 * @param a The first number
 	 * @param b The second number
@@ -92,5 +103,63 @@ public class Fraction
 		}
 		
 		return a;
+	}
+
+	/**
+	 * Compares this fraction with another
+	 * @param obj The other fraction to compare with
+	 * @return -1 if less than, 0 if equal, 1 if greater than
+	 */
+	@Override
+	public int compareTo(Fraction other)
+	{
+		if (this.equals(other))
+		{
+			return 0;
+		}
+		else if (this.getValue() < other.getValue())
+		{
+			return -1;
+		}
+		else
+		{
+			return 1;
+		}
+	}
+	
+	/**
+	 * Checks if this Fraction is equal to another
+	 * @param obj The other Fraction to check against
+	 * @return true if equal, false if unequal or of a different class
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		
+		Fraction otherReduced = ((Fraction) obj).copyAndReduce();
+		Fraction thisReduced = this.copyAndReduce();
+		
+		if (thisReduced.mDenominator != otherReduced.mDenominator)
+			return false;
+		if (thisReduced.mNumerator != otherReduced.mNumerator)
+			return false;
+		
+		return true;
+	}
+	
+	/**
+	 * Returns a String showing the values of the fraction
+	 * @return A String showing the values of the fraction
+	 */
+	@Override
+	public String toString()
+	{
+		return mNumerator + "/" + mDenominator;
 	}
 }

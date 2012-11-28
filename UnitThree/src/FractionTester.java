@@ -34,11 +34,11 @@ public class FractionTester
 			return;
 		}
 		Fraction frac = new Fraction(numerator, denominator);
+		System.out.println("Fraction is " + frac);
 		System.out.println("Value is " + frac.getValue());
 		System.out.println("Reducing...");
 		frac.reduce();
-		System.out.println("Reduced numerator is " + frac.getNumerator());
-		System.out.println("Reduced denominator is " + frac.getDenominator());
+		System.out.println("Reduced fraction is " + frac);
 		System.out.println("Reduced value is still " + frac.getValue());
 	}
 

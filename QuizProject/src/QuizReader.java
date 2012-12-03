@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -11,9 +13,9 @@ public class QuizReader {
 		mFile = file;
 	}
 	
-	public Quiz parseKey() throws NoSuchElementException
+	public Quiz parseKey() throws NoSuchElementException, FileNotFoundException
 	{
-		Scanner sc = new Scanner(mFile);
+		Scanner sc = new Scanner(new File(mFile));
 		Quiz quiz = new Quiz();
 		
 		while(sc.hasNextLine())
@@ -49,10 +51,11 @@ public class QuizReader {
 			{
 				if (choiceQuestion)
 				{ // Question descriptor runs until newline
-					String line;
-					while(!(line = sc.nextLine()).equals(""))
+					String line = sc.nextLine();
+					while(!(line.equals("")))
 					{
 						key.add(line);
+						line = sc.nextLine();
 					}
 				}
 				else

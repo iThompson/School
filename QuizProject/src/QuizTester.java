@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 
 public class QuizTester
 {
@@ -8,8 +10,18 @@ public class QuizTester
 	public static void main(String[] args)
 	{
 		QuizReader reader = new QuizReader("quiz1.txt");
-		Quiz quiz = reader.parseKey();
-
+		Quiz quiz;
+		try
+		{
+			quiz = reader.parseKey();
+		}
+		catch (FileNotFoundException e)
+		{
+			System.out.println("Could not find answer key!");
+			return;
+		}
+		
+		QuizAdministrator admin = new QuizAdministrator(quiz);
 	}
 
 }

@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-
+/**
+ * A question where the answer is text
+ */
 public class TextQuestion implements Question {
 	public static final String TYPE ="T";
 	private String myPrompt;

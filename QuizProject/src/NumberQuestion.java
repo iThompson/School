@@ -1,7 +1,10 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 
-
+/**
+ * A question with a numeric answer
+ */
 public class NumberQuestion implements Question {
 
 	public static final String TYPE ="N";
@@ -59,10 +62,17 @@ public class NumberQuestion implements Question {
 	 * @return the grade
 	 */
 	public double gradeAnswer(String answer) {
-		if (Double.parseDouble(answer) == myAnswer)
-			return 1;
-		else 
-			return 0;
+		try
+		{
+			if (Math.abs(Double.parseDouble(answer) - myAnswer) < 1E-3)
+				return 1;
+			else 
+				return 0;
+		}
+		catch (NumberFormatException e)
+		{
+			throw new InputMismatchException("That wasn't a number!");
+		}
 	}
 
 }

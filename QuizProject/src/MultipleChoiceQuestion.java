@@ -1,10 +1,14 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 
-
+/**
+ * A multiple choice question with more than one correct answer
+ */
 public class MultipleChoiceQuestion implements Question {
 	private String myPrompt;
 	private ArrayList<String> myAnswers;
+	private ArrayList<String> myCorrectAnswers;
 	public static final String TYPE = "M";
 	private int maxScore;
 	
@@ -14,6 +18,8 @@ public class MultipleChoiceQuestion implements Question {
 	 */
 	public MultipleChoiceQuestion(ArrayList<String> input)
 	{
+		myAnswers = new ArrayList<String>();
+		myCorrectAnswers = new ArrayList<String>();
 		parseKey(input);
 	}
 	
@@ -22,17 +28,36 @@ public class MultipleChoiceQuestion implements Question {
 	 * @param key the String[] from which to extract information
 	 */
 	public void parseKey(ArrayList<String> key) {
-		maxScore = key.size()-1;
 		if(key.size() < 2)
 			throw new NoSuchElementException();
-		myPrompt = key.get(0);
+		
 		for(int i = 1; i < key.size(); i++)
-			myAnswers.add(key.get(i));
+		{
+			String line = key.get(i);
+			String answer = line.substring(2).trim();
+			String type = line.substring(0, 1);
+			if (type.equals("+"))
+			{
+				myCorrectAnswers.add(answer);
+			}
+			else if (!(type.equals("-")))
+			{
+				throw new NoSuchElementException("Got invalid record in MC Question");
+			}
+			myAnswers.add(answer);
+		}
+		maxScore = myAnswers.size();
+		
+		myPrompt = key.get(0);
+		for (String answer : myAnswers)
+		{
+			myPrompt += "\n" + answer;
+		}
 	}
 
 	/**
 	 * Returns the question's type
-	 * @return the question's type
+	 * @return the qestion's type
 	 */
 	public String getType() 
 	{
@@ -53,16 +78,28 @@ public class MultipleChoiceQuestion implements Question {
 	 * @param answer the given answer
 	 * @return the grade
 	 */
-	public double gradeAnswer(String answer) 
+	public double gradeAnswer(String answer)
 	{
-		String[] answers =answer.split(" ");
-		double score = 0;
-		for(int i =0; i< answers.length; i++)
+		String[] responses =answer.split(" ");
+		// Initial score = # of incorrect answers
+		int score = myAnswers.size() - myCorrectAnswers.size();
+		
+		for (String response : responses)
 		{
-			if(myAnswers.contains(answers[i]));
-			score ++;
+			if (!myAnswers.contains(response))
+			{
+				throw new InputMismatchException(response + " is not one of the answers");
+			}
+			if (myCorrectAnswers.contains(response))
+			{
+				score++;
+			}
+			else
+			{
+				score--;
+			}
 		}
-		return score / maxScore;
+		return (double) score / maxScore;
 	}
 
 }

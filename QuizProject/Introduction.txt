@@ -1,0 +1,7 @@
+The first part of the Quiz project is the Question interface. This interface contains four methods, the two most important being parseKey and gradeAnswer. parseKey takes in an ArrayList of Strings where each element is one line from the answer key, and builds the prompt and the record of answers. gradeAnswer takes the user's response as a String and grades it on a scale from 0 to 1, with 1 being fully correct. Partial credit is only given in MultipleChoiceQuestion. The implementation of MultipleChoiceQuestion does not allow for spaces to be in the answer key, since answers are given with spaces between.
+
+The QuizReader class is responsible for the first stage of parsing the answer key. It reads through to each question record, puts the relevant lines into an ArrayList, and passes them into the Question. At the end of parseKey, it returns a Quiz object which contains all the questions contained within the key.
+
+The Quiz class is just a container to hold the questions within the quiz.
+
+The QuizAdministrator class handles the user interaction and scores the quiz. We opted to split it from Quiz so that the UI code would be isolated from the quiz data, since there is more than one way to administer a quiz. It prompts the user with each question, and takes in the user's response. If gradeAnswer within the Question deems the user's response unacceptable, QuizAdministrator will ask the question again. The return is a score from 0 to 1 for the quiz.

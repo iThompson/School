@@ -2,9 +2,20 @@ T
 Which Java keyword is used to define a subclass?
 extends
 S
-What is the original name of the Java language
+What is the original name of the Java language?
 - *7
 - C--
 + Oak
 - Gosling
 
+M
+Which of the following types are supertypes of Rectangle?
+- PrintStream
++ Shape
++ RectangularShape
++ Object
+- String
+
+N
+What is the square root of 2?
+1.41421356

@@ -1,30 +1,78 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 
-
+/**
+ * A question with a numeric answer
+ */
 public class NumberQuestion implements Question {
 
-	@Override
+	public static final String TYPE ="N";
+	private String myPrompt;
+	private double myAnswer;
+	
+	/**
+	
+	/**
+	 * Constructs a new single choice question
+	 * @param input contains question prompt and answer
+	 */
+	public NumberQuestion(ArrayList<String> input)
+	{
+		parseKey(input);
+	}
+	
+	/**
+	 * Initializes variable based on input from the key
+	 * @param key the String[] from which to extract information
+	 */
 	public void parseKey(ArrayList<String> key) {
-		// TODO Auto-generated method stub
-
+		if(key.size() != 2)
+			throw new NoSuchElementException();
+		myPrompt = key.get(0);
+		try
+		{
+			myAnswer = Double.parseDouble(key.get(1));
+		}
+		catch(NumberFormatException e)
+		{
+			throw new NoSuchElementException();
+		}
 	}
 
-	@Override
+	/**
+	 * Returns the question's type
+	 * @return the question's type
+	 */
 	public String getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return TYPE;
 	}
 
-	@Override
+	/**
+	 * Returns the question's prompt
+	 * @return the qestion's prompt
+	 */
 	public String getPrompt() {
-		// TODO Auto-generated method stub
-		return null;
+		return myPrompt;
 	}
 
-	@Override
+	/**
+	 * Returns a grade based on a given answer
+	 * @param answer the given answer
+	 * @return the grade
+	 */
 	public double gradeAnswer(String answer) {
-		// TODO Auto-generated method stub
-		return 0;
+		try
+		{
+			if (Math.abs(Double.parseDouble(answer) - myAnswer) < 1E-3)
+				return 1;
+			else 
+				return 0;
+		}
+		catch (NumberFormatException e)
+		{
+			throw new InputMismatchException("That wasn't a number!");
+		}
 	}
 
 }

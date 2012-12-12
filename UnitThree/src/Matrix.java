@@ -76,6 +76,24 @@ public class Matrix
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString()
+	{
+		String result = "\n";
+		for (int[] row : mData)
+		{
+			for (int value : row)
+				result += value + " ";
+			result += "\n";
+		}
+		
+		return result;
+	}
 	
+	public void print()
+	{
+		System.out.print(this);
+	}
 	
 }

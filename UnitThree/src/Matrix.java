@@ -96,4 +96,53 @@ public class Matrix
 		System.out.print(this);
 	}
 	
+	public int determinant()
+	{
+		if (getCols() != getRows())
+			throw new IllegalStateException("Not a square matrix!");
+		
+		int[] cols = new int[getCols()];
+		for (int i = 0; i < cols.length; i++)
+			cols[i] = i;
+		
+		return determinantSub(cols);
+	}
+	
+	private int determinantSub(int[] cols)
+	{
+		if (cols.length == 1) // Only occurs if mData is a 1x1 matrix
+			return mData[0][0];
+		else if (cols.length == 2)
+		{
+			int bottomRow = mData.length - 1;
+			return mData[bottomRow - 1][cols[0]] * mData[bottomRow][cols[1]]
+					- mData[bottomRow - 1][cols[1]] * mData[bottomRow][cols[0]];
+		}
+		else
+		{
+			int result = 0;
+			int[] subCols = new int[cols.length - 1];
+			for (int unusedIndex = 0; unusedIndex < cols.length; unusedIndex++)
+			{
+				int i;
+				for (i = 0; i < unusedIndex; i++)
+					subCols[i] = cols[i];
+				for (; i < subCols.length; i++)
+					subCols[i] = cols[i + 1];
+				
+				if (unusedIndex % 2 == 0)
+				{
+					result += mData[mData.length - cols.length][unusedIndex]
+									* determinantSub(subCols);
+				}
+				else
+				{
+					result -= mData[mData.length - cols.length][unusedIndex]
+									* determinantSub(subCols);
+				}
+			}
+			return result;
+		}
+	}
+	
 }

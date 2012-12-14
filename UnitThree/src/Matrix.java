@@ -80,7 +80,7 @@ public class Matrix
 	@Override
 	public String toString()
 	{
-		String result = "\n";
+		String result = "";
 		for (int[] row : mData)
 		{
 			for (int value : row)
@@ -93,7 +93,8 @@ public class Matrix
 	
 	public void print()
 	{
-		System.out.print(this);
+		System.out.println();
+		System.out.println(this);
 	}
 	
 	public int determinant()
@@ -132,12 +133,12 @@ public class Matrix
 				
 				if (unusedIndex % 2 == 0)
 				{
-					result += mData[mData.length - cols.length][unusedIndex]
+					result += mData[mData.length - cols.length][cols[unusedIndex]]
 									* determinantSub(subCols);
 				}
 				else
 				{
-					result -= mData[mData.length - cols.length][unusedIndex]
+					result -= mData[mData.length - cols.length][cols[unusedIndex]]
 									* determinantSub(subCols);
 				}
 			}

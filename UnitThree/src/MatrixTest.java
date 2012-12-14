@@ -12,7 +12,7 @@ public class MatrixTest
 		Matrix a = new Matrix(2, 3);
 		int[][] values = {{0, 0, 0},{0, 0, 0}};
 		Matrix b = new Matrix(values);
-		assertTrue(a.equals(b));
+		assertEquals(a, b);
 	}
 
 	@Test
@@ -21,7 +21,7 @@ public class MatrixTest
 		int[][] values = new int[3][4];
 		values[1][2] = 42;
 		Matrix a = new Matrix(values);
-		assertTrue(a.get(1,2) == 42);
+		assertEquals(42, a.get(1,2));
 		
 	}
 
@@ -29,20 +29,20 @@ public class MatrixTest
 	public void testGetRows()
 	{
 		Matrix a = new Matrix(2,3);
-		assertTrue(a.getRows() == 2);
+		assertEquals(2, a.getRows());
 		int[][] values = {{1,2,3},{4,5,6}};
 		Matrix b = new Matrix(values);
-		assertTrue(b.getRows() == 2);
+		assertEquals(2, b.getRows());
 	}
 
 	@Test
 	public void testGetCols()
 	{
 		Matrix a = new Matrix(2,3);
-		assertTrue(a.getCols() == 3);
+		assertEquals(3, a.getCols());
 		int[][] values = {{1,2,3},{4,5,6}};
 		Matrix b = new Matrix(values);
-		assertTrue(b.getCols() == 3);
+		assertEquals(3, b.getCols());
 	}
 	
 	@Test
@@ -50,14 +50,24 @@ public class MatrixTest
 	{
 		int[][] values = {{1,2,3,10},{17,5,6,77},{7,8,9,2},{12,27,16,5}};
 		Matrix a = new Matrix(values);
-//		assertTrue(a.determinant() == 78);
 		assertEquals(25142, a.determinant());
+	}
+	
+	@Test
+	public void test1x1Determinant()
+	{
+		int[][] values = {{42}};
+		Matrix a = new Matrix(values);
+		assertEquals(42, a.determinant());
 	}
 
 	@Test
 	public void testToString()
 	{
-		fail("Not yet implemented");
+		int[][] values = {{1,2,3},{2,3,4}};
+		Matrix a = new Matrix(values);
+		String result = "1 2 3 \n2 3 4 \n";
+		assertEquals(result, a.toString());
 	}
 
 }

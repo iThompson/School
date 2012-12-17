@@ -1,6 +1,10 @@
 import java.util.Arrays;
 
-
+/**
+ * A class which represents an immutable matrix
+ * @author Ian Thompson
+ * @version 12.17.2012
+ */
 public class Matrix
 {
 	private int[][] mData;

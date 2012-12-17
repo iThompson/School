@@ -1,6 +1,16 @@
-
+/**
+ * Class for performing mathematical operations on matrices
+ * @author Ian Thompson
+ * @version 12.17.2012
+ */
 public class MatrixMath
 {
+	/**
+	 * Adds two matrices together
+	 * @param a The first matrix
+	 * @param b The second matrix
+	 * @return The resulting matrix
+	 */
 	public static Matrix add(Matrix a, Matrix b)
 	{
 		if (a.getRows() != b.getRows() || a.getCols() != b.getCols())
@@ -14,6 +24,12 @@ public class MatrixMath
 		return new Matrix(newValues);
 	}
 	
+	/**
+	 * Subtracts two matrices
+	 * @param a The first matrix
+	 * @param b The second matrix
+	 * @return The resulting matrix
+	 */
 	public static Matrix subtract(Matrix a, Matrix b)
 	{
 		if (a.getRows() != b.getRows() || a.getCols() != b.getCols())
@@ -27,6 +43,12 @@ public class MatrixMath
 		return new Matrix(newValues);
 	}
 	
+	/**
+	 * Multiplies a matrix by a scalar
+	 * @param a The scalar
+	 * @param b The matrix matrix
+	 * @return The resulting matrix
+	 */
 	public static Matrix multiply(int a, Matrix b)
 	{	
 		int[][] newValues = new int[b.getRows()][b.getCols()];
@@ -37,6 +59,12 @@ public class MatrixMath
 		return new Matrix(newValues);
 	}
 	
+	/**
+	 * Multiplies two matrices
+	 * @param a The first matrix
+	 * @param b The second matrix
+	 * @return The resulting matrix
+	 */
 	public static Matrix multiply(Matrix a, Matrix b)
 	{
 		if (a.getCols() != b.getRows())
@@ -48,12 +76,17 @@ public class MatrixMath
 			{
 				newValues[i][j] = 0;
 				for (int term = 0; term < a.getCols(); term++)
-					newValues[i][j] += a.get(i, term) * b.get(term, i);
+					newValues[i][j] += a.get(i, term) * b.get(term, j);
 			}
 		
 		return new Matrix(newValues);
 	}
 	
+	/**
+	 * Returns the transpose of a matrix
+	 * @param a The original matrix
+	 * @return The matrix's transpose
+	 */
 	public static Matrix transpose(Matrix mat)
 	{
 		int[][] newValues = new int[mat.getCols()][mat.getRows()];

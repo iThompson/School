@@ -5,11 +5,20 @@ public class Matrix
 {
 	private int[][] mData;
 	
+	/**
+	 * Creates a matrix of 0s with the given size
+	 * @param row The number of rows
+	 * @param col The number of columns
+	 */
 	public Matrix(int row, int col)
 	{
 		mData = new int[row][col];
 	}
 	
+	/**
+	 * Creates a matrix with the provided values
+	 * @param values The matrix values, in [row][column] order
+	 */
 	public Matrix(int[][] values)
 	{
 		int rowSize = values[0].length;
@@ -27,32 +36,39 @@ public class Matrix
 				mData[i][j] = values[i][j];
 	}
 	
-	public void loadValues(int[][] values)
-	{
-		if (values.length != getRows())
-				throw new IllegalArgumentException("Wrong row count!");
-		for (int[] valueRow : values)
-			if (valueRow.length != getCols())
-				throw new IllegalArgumentException("Wrong column count!");
-		
-		mData = values;
-	}
-	
+	/**
+	 * Returns a value from the matrix
+	 * @param row The row of the value
+	 * @param col The column of the value
+	 * @return The value
+	 */
 	public int get(int row, int col)
 	{
 		return mData[row][col];
 	}
 	
+	/**
+	 * Returns the number of rows in the matrix
+	 * @return The number of rows in the matrix
+	 */
 	public int getRows()
 	{
 		return mData.length;
 	}
 	
+	/**
+	 * Returns the number of columns in the matrix
+	 * @return The number of columns in the matrix
+	 */
 	public int getCols()
 	{
 		return mData[0].length;
 	}
 
+	/**
+	 * Returns a hash for this matrix
+	 * @return A hash for this matrix
+	 */
 	@Override
 	public int hashCode()
 	{
@@ -62,6 +78,11 @@ public class Matrix
 		return result;
 	}
 
+	/**
+	 * Tests for equality with another matrix
+	 * @param obj The other matrix
+	 * @return whether the two are equals
+	 */
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -77,6 +98,10 @@ public class Matrix
 		return true;
 	}
 
+	/**
+	 * Returns a String representing this matrix
+	 * @return A String representing this matrix
+	 */
 	@Override
 	public String toString()
 	{
@@ -91,12 +116,19 @@ public class Matrix
 		return result;
 	}
 	
+	/**
+	 * Prints this Matrix to the console
+	 */
 	public void print()
 	{
 		System.out.println();
 		System.out.println(this);
 	}
 	
+	/**
+	 * Returns the determinant of the matrix
+	 * @return The determinant of the matrix
+	 */
 	public int determinant()
 	{
 		if (getCols() != getRows())
@@ -109,6 +141,11 @@ public class Matrix
 		return determinantSub(cols);
 	}
 	
+	/**
+	 * Recursive helper method for calculating the determinant
+	 * @param cols The columns of the sub-matrix currently being calculated
+	 * @return The determinant of the sub-matrix indicated by cols
+	 */
 	private int determinantSub(int[] cols)
 	{
 		if (cols.length == 1) // Only occurs if mData is a 1x1 matrix
@@ -146,4 +183,17 @@ public class Matrix
 		}
 	}
 	
+	/**
+	 * Creates a square nxn identity matrix
+	 * @param n The dimensions of the matrix
+	 * @return A square identity matrix of nxn size
+	 */
+	public static Matrix identity(int n)
+	{
+		int[][] values = new int[n][n];
+		for (int i = 0; i < n; i++)
+			values[i][i] = 1;
+		
+		return new Matrix(values);
+	}
 }

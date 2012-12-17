@@ -69,5 +69,18 @@ public class MatrixTest
 		String result = "1 2 3 \n2 3 4 \n";
 		assertEquals(result, a.toString());
 	}
+	
+	@Test
+	public void testIdentity()
+	{
+		int[][] identity = {{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}};
+		Matrix expected = new Matrix(identity);
+		assertEquals(expected, Matrix.identity(4));
+		
+		int[][] testValues = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}};
+		Matrix original = new Matrix(testValues);
+		Matrix result = MatrixMath.multiply(original, Matrix.identity(4));
+		assertEquals(original, result);
+	}
 
 }

@@ -22,6 +22,8 @@ public class Card
 	
 	public static final int SUIT_OFFSET = VALUE_KING + 1;
 	
+	public static final int NUM_CARDS = 52;
+	
 	public static final String[] SUIT_NAMES = {"Hearts",
 		"Clubs",
 		"Diamonds",
@@ -130,5 +132,29 @@ public class Card
 	public String toString()
 	{
 		return VALUE_NAMES[getValue()] + " of " + SUIT_NAMES[getSuit()];
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + mCardId;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Card other = (Card) obj;
+		if (mCardId != other.mCardId)
+			return false;
+		return true;
 	}
 }

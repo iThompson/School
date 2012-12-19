@@ -16,6 +16,12 @@ public class MatrixMathTest
 		assertEquals(new Matrix(result), add);
 	}
 
+	@Test(expected=IllegalArgumentException.class)
+	public void testAddException()
+	{
+		MatrixMath.add(new Matrix(2,3), new Matrix(3,3));
+	}
+
 	@Test
 	public void testSubtract()
 	{
@@ -24,6 +30,12 @@ public class MatrixMathTest
 		Matrix subtract = MatrixMath.subtract(new Matrix(aValues), new Matrix(bValues));
 		int[][] result = {{5,7,9},{-5,-7,-9},{-7,-8,-9}};
 		assertEquals(new Matrix(result), subtract);
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testSubtractException()
+	{
+		MatrixMath.add(new Matrix(2,3), new Matrix(3,3));
 	}
 
 	@Test
@@ -47,6 +59,12 @@ public class MatrixMathTest
 		int[][] result = {{10,12},{19,24}};
 		Matrix b = new Matrix(result);
 		assertEquals(b, a);
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testMultiplyException()
+	{
+		MatrixMath.multiply(new Matrix(7,4), new Matrix(5,6));
 	}
 
 	@Test

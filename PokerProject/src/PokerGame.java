@@ -1,5 +1,5 @@
 
-public class PokerGame
+public abstract class PokerGame
 {
 
 }

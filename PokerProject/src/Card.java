@@ -92,7 +92,8 @@ public class Card
 	 */
 	public static boolean isValidId(int id)
 	{
-		if (id < VALUE_ACE * SUIT_HEARTS || id > VALUE_KING * SUIT_SPADES)
+		if (id < buildCardId(VALUE_ACE, SUIT_HEARTS)
+				|| id > buildCardId(VALUE_KING, SUIT_SPADES))
 		{
 			return false;
 		}

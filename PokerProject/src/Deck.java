@@ -1,7 +1,10 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
-
+/**
+ * Represents a standard deck of cards
+ * @author Ian Thompson
+ */
 public class Deck
 {
 	private ArrayList<Card> mCards;
@@ -31,7 +34,7 @@ public class Deck
 	public Card drawCard()
 	{
 		if (mCards.isEmpty())
-			return null;
+			throw new IllegalStateException("Out of cards");
 		
 		return mCards.remove(mCards.size() - 1);
 	}
@@ -73,5 +76,13 @@ public class Deck
 	public int getSize()
 	{
 		return mCards.size();
+	}
+	
+	/**
+	 * Removes all cards from the deck, without returning them
+	 */
+	public void emptyDeck()
+	{
+		mCards.clear();
 	}
 }

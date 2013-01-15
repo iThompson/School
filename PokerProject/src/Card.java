@@ -1,5 +1,8 @@
-
-public class Card
+/**
+ * Represents a standard card
+ * @author Ian Thompson
+ */
+public class Card implements Comparable<Card>
 {
 	public static final int SUIT_HEARTS = 0;
 	public static final int SUIT_CLUBS = 1;
@@ -130,6 +133,10 @@ public class Card
 		return mCardId / SUIT_OFFSET;
 	}
 	
+	/**
+	 * Returns a String representing the card
+	 * @return A String representing the card
+	 */
 	public String toString()
 	{
 		return VALUE_NAMES[getValue()] + " of " + SUIT_NAMES[getSuit()];
@@ -157,5 +164,11 @@ public class Card
 		if (mCardId != other.mCardId)
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(Card other)
+	{
+		return this.getValue() - other.getValue();
 	}
 }

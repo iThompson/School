@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * A class to test the Matrix and MatrixMath classes
  * @author Ian Thompson
@@ -31,6 +33,5 @@ public class MatrixTester
 		MatrixMath.multiply(matA, matC).print();
 		System.out.print("The transpose of C is");
 		MatrixMath.transpose(matC).print();
-		
 	}
 }

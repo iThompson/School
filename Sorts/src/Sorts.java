@@ -95,7 +95,7 @@ public class Sorts
 		initValues();
 		System.out.println("Initial values: ");
 		printValues();
-		insertionSort();
+		bubbleSort();
 		System.out.println("Final values: ");
 		printValues();
 	}
@@ -123,5 +123,20 @@ public class Sorts
 			}
 		}
 		return mindex;
+	}
+	
+	public static void bubbleSort()
+	{
+		for (int current = 0; current < SIZE - 1; current++)
+			bubbleUp(current, SIZE - 1);
+	}
+	
+	public static void bubbleUp(int startIndex, int endIndex)
+	{
+		for(int index = endIndex; index > startIndex; index--)
+		{
+			if (values[index] < values[index-1])
+				swap(index, index - 1);
+		}
 	}
 }

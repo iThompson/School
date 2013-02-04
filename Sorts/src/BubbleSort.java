@@ -8,7 +8,7 @@ import java.util.Collections;
  */
 public class BubbleSort
 {
-	public static int SIZE = 50;
+	public static final int SIZE = 50;
 
 	public static void main(String[] args)
 	{

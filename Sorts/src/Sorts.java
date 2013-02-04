@@ -66,7 +66,7 @@ public class Sorts
 			else
 				System.out.print(fmt.format(value) + " ");
 		}
-		System.out.println();
+		System.out.println("Sorted: " + isSorted());
 	}
 
 	public static void insertionSort()
@@ -95,7 +95,7 @@ public class Sorts
 		initValues();
 		System.out.println("Initial values: ");
 		printValues();
-		bubbleSort();
+		mergeSort(0, SIZE - 1);
 		System.out.println("Final values: ");
 		printValues();
 	}
@@ -137,6 +137,61 @@ public class Sorts
 		{
 			if (values[index] < values[index-1])
 				swap(index, index - 1);
+		}
+	}
+	
+	public static void mergeSort(int start, int end)
+	{
+		if (start != end)
+		{
+			int mid = (start + end) / 2;
+			mergeSort(start, mid);
+			mergeSort(mid + 1, end);
+			
+			merge(start, mid, mid + 1, end);
+		}
+	}
+	
+	public static void merge(int leftStart, int leftEnd, int rightStart, int rightEnd)
+	{
+		int size = (leftEnd - leftStart + 1) + (rightEnd - rightStart + 1);
+		int[] temp = new int[size];
+		int leftIndex = leftStart;
+		int rightIndex = rightStart;
+		int tempIndex = 0;
+		while (leftIndex <= leftEnd && rightIndex <= rightEnd)
+		{
+			if (values[leftIndex] < values[rightIndex])
+			{
+				temp[tempIndex] = values[leftIndex];
+				tempIndex++;
+				leftIndex++;
+			}
+			else
+			{
+				temp[tempIndex] = values[rightIndex];
+				tempIndex++;
+				rightIndex++;
+			}
+		}
+		
+		while (leftIndex <= leftEnd)
+		{
+			temp[tempIndex] = values[leftIndex];
+			tempIndex++;
+			leftIndex++;
+		}
+		
+		while (rightIndex <= rightEnd)
+		{
+			temp[tempIndex] = values[rightIndex];
+			tempIndex++;
+			rightIndex++;
+		}
+		
+		for (int i = 0; i < temp.length; i++)
+		{
+			values[leftStart + i] = temp[i];
 		}
 	}
 }

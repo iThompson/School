@@ -7,8 +7,7 @@
 // Further edited by Ian Thompson 1-17-13
 //----------------------------------------------------------------------------
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
 import java.text.DecimalFormat;
 
 public class Sorts
@@ -95,7 +94,7 @@ public class Sorts
 		initValues();
 		System.out.println("Initial values: ");
 		printValues();
-		mergeSort(0, SIZE - 1);
+		quickSort(0, SIZE - 1);
 		System.out.println("Final values: ");
 		printValues();
 	}
@@ -193,5 +192,34 @@ public class Sorts
 		{
 			values[leftStart + i] = temp[i];
 		}
+	}
+	
+	public static void quickSort(int from, int to)
+	{
+		if(from < to)
+		{
+			int p = split(from, to);
+			quickSort(from, p);
+			quickSort(p+1, to);
+		}
+	}
+	
+	public static int split(int from, int to)
+	{
+		int pivot = values[from];
+		int first = from - 1;
+		int last = to + 1;
+		while (first < last)
+		{
+			first++;
+			while(values[first] < pivot)
+				first++;
+			last--;
+			while(values[last] > pivot)
+				last--;
+			if(first < last)
+				swap(first, last);
+		}
+		return last;
 	}
 }

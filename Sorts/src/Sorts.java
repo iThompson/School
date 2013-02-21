@@ -94,7 +94,7 @@ public class Sorts
 		initValues();
 		System.out.println("Initial values: ");
 		printValues();
-		quickSort(0, SIZE - 1);
+		mergeSort(0, SIZE - 1);
 		System.out.println("Final values: ");
 		printValues();
 	}

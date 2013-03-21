@@ -10,21 +10,41 @@ public class KingCrab extends CrabCritter
 	@Override
 	public void processActors(ArrayList<Actor> actors)
 	{
-		Location myLoc = getLocation();
 		Grid<Actor> grd = getGrid();
 		for (Actor act : actors)
 		{
-			Location otherLoc = act.getLocation();
-			int direction = myLoc.getDirectionToward(otherLoc);
-			Location target = otherLoc.getAdjacentLocation(direction);
-			if (grd.isValid(target))
+			ArrayList<Location> moves = new ArrayList<Location>();
+			for (int d = Location.NORTH; d < Location.FULL_CIRCLE; d += Location.HALF_RIGHT)
 			{
-				act.moveTo(target);
+				Location move = act.getLocation().getAdjacentLocation(d);
+				if (grd.isValid(move) && !isAdjacent(move))
+				{
+					if (grd.get(move) == null)
+						moves.add(move);
+				}
 			}
-			else
+			
+			if (moves.size() == 0)
 			{
 				act.removeSelfFromGrid();
 			}
+			else
+			{
+				act.moveTo(moves.get((int)(Math.random() * moves.size())));
+			}
 		}
+	}
+	
+	private boolean isAdjacent(Location loc)
+	{
+		Location myLoc = getLocation();
+		if (myLoc.equals(loc))
+			return false;
+		int dx = Math.abs(myLoc.getCol() - loc.getCol());
+		int dy = Math.abs(myLoc.getRow() - loc.getRow());
+		if (dx <= 1 && dy <= 1)
+			return true;
+		else
+			return false;
 	}
 }

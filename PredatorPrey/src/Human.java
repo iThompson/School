@@ -1,25 +1,41 @@
 import info.gridworld.actor.Actor;
+import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
+
+import java.awt.Color;
 
 
 public class Human extends Actor
 {
+	private static final double MOVE_CHANCE = 0.75;
+	private boolean isHypnotized;
+	
+	public Human()
+	{
+		isHypnotized = false;
+	}
+	
 	@Override
 	public void act()
 	{
-		if (canMove() && Math.random() < 0.5)
-		{ // 50% chance to move if possible
-			move();
-		}
-		else
+		if (!isHypnotized)
 		{
-			setDirection(getDirection() + Location.HALF_RIGHT);
+			if (canMove() && Math.random() < MOVE_CHANCE)
+			{ // 75% chance to move if possible
+				move();
+			}
+			else
+			{
+				setDirection(getDirection() + Location.HALF_RIGHT);
+			}
 		}
 	}
 	
 	public boolean canMove()
 	{
-		if (getGrid().get(getLocation().getAdjacentLocation(getDirection())) == null)
+		Location nextLoc = getLocation().getAdjacentLocation(getDirection());
+		Grid<Actor> grd = getGrid();
+		if (grd.isValid(nextLoc) && grd.get(nextLoc) == null)
 			return true;
 		else
 			return false;
@@ -28,5 +44,11 @@ public class Human extends Actor
 	public void move()
 	{
 		moveTo(getLocation().getAdjacentLocation(getDirection()));
+	}
+	
+	public void hypnotize()
+	{
+		isHypnotized = true;
+		setColor(Color.RED);
 	}
 }

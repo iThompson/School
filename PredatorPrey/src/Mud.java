@@ -3,6 +3,7 @@ import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -37,6 +38,11 @@ public class Mud extends Actor
 		{
 			mAct.putSelfInGrid(mGrd, mLoc);
 		}
+		
+		public Actor getActor()
+		{
+			return mAct;
+		}
 	}
 	
 	private Queue<ActorData> mStoredActors = new LinkedList<ActorData>();
@@ -46,18 +52,60 @@ public class Mud extends Actor
 	@Override
 	public void act()
 	{
-		ArrayList<Location> neighbors = getGrid().getOccupiedAdjacentLocations(getLocation());
+		mCurrentTick++;
+		ArrayList<Location> neighborLocs = getGrid().getOccupiedAdjacentLocations(getLocation());
+		ArrayList<Actor> neighbors = new ArrayList<Actor>();
+		for (Location loc : neighborLocs)
+		{
+			neighbors.add(getGrid().get(loc));
+		}
 		captureActors(neighbors);
-		updateIgnoreList(neighbors);
+		trimIgnoreList(neighbors);
+		releaseActors();
 	}
 	
-	private void captureActors(ArrayList<Location> neighbors)
+	private void captureActors(ArrayList<Actor> neighbors)
 	{
-		
+		for (Actor act : neighbors)
+		{
+			if (act != null) // Don't see why this would ever fail, but let's be safe
+			{
+				if (!mIgnoreActors.contains(act))
+				{
+					mStoredActors.offer(new ActorData(act, mCurrentTick + CAUGHT_TIME));
+				}
+			}
+		}
 	}
 	
-	private void updateIgnoreList(ArrayList<Location> neighbors)
+	private void releaseActors()
 	{
-		
+		boolean done = false;
+		while (!done)
+		{
+			ActorData data = mStoredActors.peek();
+			if (data == null || data.getReleaseTime() > mCurrentTick)
+			{
+				done = true;
+			}
+			else
+			{
+				mIgnoreActors.add(data.getActor());
+				mStoredActors.poll().restoreActor();
+			}
+		}
+	}
+	
+	private void trimIgnoreList(ArrayList<Actor> neighbors)
+	{
+		Iterator<Actor> it = mIgnoreActors.iterator();
+		while(it.hasNext())
+		{
+			Actor act = it.next();
+			if (!neighbors.contains(act))
+			{
+				it.remove();
+			}
+		}
 	}
 }

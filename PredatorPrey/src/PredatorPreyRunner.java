@@ -16,7 +16,13 @@ public class PredatorPreyRunner
 	 */
 	public static void main(String[] args)
 	{
-		ActorWorld world = new ActorWorld(new /*BoundedGrid<Actor>(20, 20)*/ UnboundedGrid<Actor>());
+		ActorWorld world = new ActorWorld(/*new BoundedGrid<Actor>(20, 20)*/ new UnboundedGrid<Actor>());
+		
+		for (int i = 0; i < 10; i++)
+		{
+			world.add(new Mud());
+		}
+		
 		world.add(new Location(2,5), new Goby());
 		world.add(new Location(3,5), new Shrimp());
 		for (int i = 0; i < 15; i++)

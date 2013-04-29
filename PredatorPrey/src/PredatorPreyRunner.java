@@ -2,8 +2,8 @@ import info.gridworld.actor.Actor;
 import info.gridworld.actor.ActorWorld;
 import info.gridworld.actor.Flower;
 import info.gridworld.actor.Rock;
-import info.gridworld.grid.BoundedGrid;
 import info.gridworld.grid.Location;
+import info.gridworld.grid.UnboundedGrid;
 
 import java.awt.Color;
 
@@ -16,7 +16,13 @@ public class PredatorPreyRunner
 	 */
 	public static void main(String[] args)
 	{
-		ActorWorld world = new ActorWorld(new BoundedGrid<Actor>(20, 20));
+		ActorWorld world = new ActorWorld(/*new BoundedGrid<Actor>(20, 20)*/ new UnboundedGrid<Actor>());
+		
+		for (int i = 0; i < 10; i++)
+		{
+			world.add(new Mud());
+		}
+		
 		world.add(new Location(2,5), new Goby());
 		world.add(new Location(3,5), new Shrimp());
 		for (int i = 0; i < 15; i++)
@@ -38,7 +44,7 @@ public class PredatorPreyRunner
 		world.add(catfish3);
 		world.add(mussel);
 		
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < 20; i++)
 			world.add(new Human());
 		world.add(new Alien());
 		world.show();

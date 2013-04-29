@@ -102,7 +102,7 @@ public class Alien extends Critter
 			int direction = myLoc.getDirectionToward(loc);
 			locs.add(myLoc.getAdjacentLocation(direction)); // Aliens stop for nothing :D
 		}
-		
+
 		return locs;
 	}
 
